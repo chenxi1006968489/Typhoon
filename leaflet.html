@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<link href="https://cdn.bootcss.com/leaflet/1.3.4/leaflet.css"
+      rel="stylesheet">
+<script src="https://cdn.bootcss.com/leaflet/1.3.4/leaflet.js"></script>
+<body>
+<h2>leaflet demo</h2>
+<div id="map" style="width:100%;height: 600px;"></div>
+
+
+<script>
+    //定义地图服务URL
+    let  mapboxUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
+
+
+    // 定义两个图层，影像图层和街道图层（这里是有了mapbox地图服务）
+    var satellite = L.tileLayer(mapboxUrl, { id: 'mapbox.satellite'});
+    var  streets = L.tileLayer(mapboxUrl, { id: 'mapbox.streets'});
+
+    let map = L.map('map',{
+        center: [25,116.2],
+        zoom: 6,
+        layers: [satellite,streets]
+    });
+
+    // 通过layer control来实现图层切换UI
+    // https://leafletjs.com/examples/layers-control/
+    let baselayer = {
+        "影像图": satellite,
+        "街道图": streets
+    }
+    let transButton = L.control.layers(baselayer).addTo(map);
+    // let polyline = [    [45.51, -122.68],
+    //     [44.877, -122.43],
+    //     [44.04, -118.2]];
+    // let drawLine =   L.polyline(polyline,{
+    //     color: 'red'
+    // }).addTo(map);
+
+</script>
+</body>
+</html>
